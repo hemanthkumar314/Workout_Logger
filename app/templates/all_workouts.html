@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block head %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename= 'beauty.css') }}"
+/>
+{% endblock %} {% block content %}
+<center>
+  <h1>
+    Welcome, {{ user.name }}
+  </h1>
+</center>
+
+<center>
+  <div>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class=flashes>
+        {{ messages[0] }}
+      </div>
+      {% endif %} {% endwith %}
+    <table class="table table-hover" style="width: 700px;">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Performed At</th>
+          <th scope="col">Workout</th>
+          <th scope="col">Count</th>
+          <th scope="col">Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for workout in workouts %}
+        <tr>
+          <td>{{ workout.date_posted.strftime('%m/%d/%Y') }}</td>
+          <td>{{ workout.workout }}</td>
+          <td>{{ workout.count }}</td>
+          <td>{{ workout.comment }}</td>
+          <td>
+            <a
+              href="{{ url_for('main.update_workout', workout_id=workout.id) }}"
+              class="btn btn-outline-primary"
+              role="button"
+            >
+              Edit
+            </a>
+          </td>
+          <td>
+            <a
+              href="{{ url_for('main.delete_workout', workout_id=workout.id) }}"
+              class="btn btn-outline-danger"
+              role="button"
+            >
+              Delete
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</center>
+
+
+{% endblock %}

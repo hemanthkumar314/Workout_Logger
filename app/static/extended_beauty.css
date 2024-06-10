@@ -1,0 +1,37 @@
+h1,
+h2,
+h4,
+p {
+  font-family: "Arvo", serif;
+}
+
+p {
+  font-size: 17px;
+}
+
+#intro {
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+.box{
+  align-items: center;
+  margin: auto;
+  margin-top: 3%;
+  border:2px solid black;
+  border-radius: 5px;
+  width: 45%;
+  height: 40%;
+  padding: 5%;
+}
+
+.but1{
+  margin: auto;
+  margin-top: 10px;
+}
+
+.para{
+  margin: 2% 30%;
+}
