@@ -7,10 +7,9 @@ from . import db
 auth = Blueprint('auth', __name__)
 
 
-@auth.route('/login')
-def login():
-    return render_template('login.html')
-
+# @auth.route('/login')
+# def login():
+#     return render_template('login.html')
 
 @auth.route('/login', methods=['POST'])
 def login_post():
@@ -22,9 +21,9 @@ def login_post():
 
     if not user or not (user.password==password):
         flash('Please check your login details and try again.')
-        return redirect(url_for('auth.login'))  
+        return redirect(url_for('main.index'))  
     login_user(user, remember=remember)
-    return redirect(url_for('main.profile'))
+    return render_template('main.html')
 
 
 @auth.route('/signup')
@@ -52,7 +51,7 @@ def signup_post():
     db.session.add(new_user)
     db.session.commit()
 
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('main.index'))
 
 
 @auth.route('/logout')

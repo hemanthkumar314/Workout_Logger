@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block head %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename= 'extended_beauty.css') }}"
+/>
+{% endblock %} {% block content %}
+<div id="intro">
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <div class="notification is-success">
+    {{ messages[0] }}
+  </div>
+  {% endif %} {% endwith %}
+  <div class="row">
+    <div class="col-lg-7">
+      <img
+      src="{{ url_for('static', filename= 'images/main.png') }}"
+      alt="workouts"
+      style="width: 65%;margin: 5%;height: 65%;margin-left: 10%;"
+    />
+    </div>
+
+    <div class="col-lg-4">
+      <p class="para">
+        Welcome to your Workouts-logger! <br />
+        A workout logger is a valuable tool for tracking your fitness progress, maintaining consistency, and making informed decisions about your exercise routine
+      </p>
+    </div>
+  </div>
+  
+</div>
+{% endblock %}

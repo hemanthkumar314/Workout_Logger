@@ -5,6 +5,11 @@ p {
   font-family: "Arvo", serif;
 }
 
+body
+{
+  overflow:hidden;
+}
+
 p {
   font-size: 17px;
 }
@@ -20,11 +25,24 @@ p {
   align-items: center;
   margin: auto;
   margin-top: 3%;
+  margin-left: 5%;
   border:2px solid black;
   border-radius: 5px;
   width: 45%;
   height: 40%;
-  padding: 5%;
+  padding: 3%;
+  z-index: 3;
+}
+
+.box1{
+  align-items: center;
+  margin: auto;
+  margin-top: 3%;
+  border:2px solid black;
+  border-radius: 5px;
+  width: 45%;
+  height: 40%;
+  padding: 3%;
 }
 
 .but1{
@@ -33,5 +51,5 @@ p {
 }
 
 .para{
-  margin: 2% 30%;
+  margin: 2%;
 }
