@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block head %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename= 'extended_beauty.css') }}"
+/>
+{% endblock %} {% block content %}
+<center>
+    <div class="box1">
+      <form method="POST" action="/newtarget">
+        <h2>Add New Workout</h2>
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <div class="notification is-danger">
+          {{ messages[0] }}
+        </div>
+        {% endif %} {% endwith %}
+        <div class="form-group" >
+          <label for="workout">Name of Workout</label>
+          <input
+            type="text"
+            class="form-control"
+            id="workout"
+            name="workout"
+            aria-describedby="pushupHelp"
+            placeholder="Enter name of workout"
+            required
+          />
+        </div>
+        <div class="form-group" >
+          <label for="count">Count</label>
+          <input
+            type="number"
+            class="form-control"
+            id="count"
+            name="count"
+            aria-describedby="pushupHelp"
+            placeholder="Enter number done"
+            required
+          />
+        </div>
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="date"
+              name="date"
+              aria-describedby="dateHelp"
+              placeholder="Select a date"
+              required
+            />
+          </div>          
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 2.5%;">Set Target</button>
+      </form>
+    </div>
+  
+</center>
+
+{% endblock %}

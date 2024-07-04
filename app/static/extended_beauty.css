@@ -4,11 +4,11 @@ h4,
 p {
   font-family: "Arvo", serif;
 }
-
+/* 
 body
 {
   overflow:hidden;
-}
+} */
 
 p {
   font-size: 17px;
@@ -50,6 +50,9 @@ p {
   margin-top: 10px;
 }
 
-.para{
-  margin: 2%;
+.matter{
+  margin-top:2%;
+  margin-left:15%;
+  margin-right:10%;
+  flex: 1;
 }

@@ -5,27 +5,27 @@
 />
 {% endblock %} {% block content %}
 <div id="intro">
-  {% with messages = get_flashed_messages() %} {% if messages %}
+  <!-- {% with messages = get_flashed_messages() %} {% if messages %}
   <div class="notification is-success">
     {{ messages[0] }}
   </div>
-  {% endif %} {% endwith %}
-  <div class="row">
-    <div class="col-lg-7">
+  {% endif %} {% endwith %} -->
+  <div style="display: flex; align-items: center;">
+    <div>
       <img
-      src="{{ url_for('static', filename= 'images/main.png') }}"
-      alt="workouts"
-      style="width: 65%;margin: 5%;height: 65%;margin-left: 10%;"
-    />
+        src="{{ url_for('static', filename= 'images/main.png') }}"
+        alt="workouts"
+        style="width: 130%; margin: 5%; height: 450px; margin-left: 15%;margin-top:7%;"
+      />
     </div>
-
-    <div class="col-lg-4">
-      <p class="para">
-        Welcome to your Workouts-logger! <br />
-        A workout logger is a valuable tool for tracking your fitness progress, maintaining consistency, and making informed decisions about your exercise routine
-      </p>
+    <div class="matter container">
+      <h2><b>Welcome to your Workout Logger</b></h2>
+      <h5>A workout logger is a valuable tool for anyone serious about their fitness journey. By allowing you to add detailed records of your workouts, it ensures you can track your progress over time. You can view all your past workouts in one place, making it easy to see patterns, recognize improvements, and identify areas needing more focus.</h5>
+      <h5>Setting weekly targets within the logger helps you maintain consistency and stay motivated. You can set specific goals tailored to your fitness level and adjust them as you progress, ensuring continuous improvement.</h5>
+      <h5>The ability to view detailed statistics is another powerful feature of a workout logger. By analyzing your workout data, you can make informed decisions about your exercise routine</h5>
     </div>
   </div>
+  
   
 </div>
 {% endblock %}
