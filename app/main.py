@@ -7,7 +7,6 @@ from flask_login import current_user, login_required
 
 main = Blueprint('main', __name__)
 
-
 @main.route('/')
 def index():
     return render_template('index.html')
@@ -28,6 +27,14 @@ def user_workouts():
     user = User.query.filter_by(email=current_user.email).first_or_404()
     workouts = user.workouts  # Workout.query.filter_by(author=user).order_by(Workout.date_posted.desc())
     return render_template('all_workouts.html', workouts=workouts, user=user)
+
+#all target
+@main.route("/alltargets")
+@login_required
+def user_targets():
+    user = User.query.filter_by(email=current_user.email).first_or_404()
+    targets = user.targets 
+    return render_template('all_targets.html', targets=targets, user=user)
 
 #new target
 @main.route("/newtarget")
@@ -90,4 +97,14 @@ def delete_workout(workout_id):
     db.session.delete(workout)
     db.session.commit()
     flash('Your workout has been deleted!')
+    return redirect(url_for('main.user_workouts'))
+
+#delete target
+@main.route("/target/<int:target_id>/delete", methods=['GET', 'POST'])
+@login_required
+def delete_target(target_id):
+    target = Target.query.get_or_404(target_id)
+    db.session.delete(target)
+    db.session.commit()
+    flash('Your target has been deleted!')
     return redirect(url_for('main.user_workouts'))

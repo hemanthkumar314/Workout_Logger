@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block head %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename= 'beauty.css') }}"
+/>
+{% endblock %} {% block content %}
+<center>
+    <h3>All Set Targets</h3>
+    <div style="margin-top: 3%;">
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <div class=flashes>
+            {{ messages[0] }}
+        </div>
+        {% endif %} {% endwith %}
+        <table class="table table-hover" style="width: 700px;">
+        <thead class="thead-dark">
+            <tr>
+            <th scope="col">Workout</th>
+            <th scope="col">Count</th>
+            <th scope="col">Added on</th>
+            <th scope="col">Target Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for target in targets %}
+            <tr>
+            <td>{{ target.workout }}</td>
+            <td>{{ target.count }}</td>
+            <td>{{ target.date_posted.strftime('%d/%m/%Y') }}</td>
+            <td>{{ target.target.strftime('%d/%m/%Y')  }}</td>
+            <td>
+                <a
+                href="{{ url_for('main.delete_target', target_id=target.id) }}"
+                class="btn btn-outline-danger"
+                role="button"
+   
+                >
+                Delete
+                </a>
+            </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</center>
+
+  
+
+{% endblock %}

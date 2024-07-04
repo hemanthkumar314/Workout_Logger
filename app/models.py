@@ -8,7 +8,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
     workouts = db.relationship('Workout', backref='author', lazy=True)
-
+    targets = db.relationship('Target', backref='author', lazy=True)
 
 class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,5 +23,5 @@ class Target(db.Model):
     workout = db.Column(db.Text, nullable=False)
     count = db.Column(db.Integer, nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    target = db.Column(db.Text, nullable=False)
+    target = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

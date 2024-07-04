@@ -4,19 +4,15 @@
   href="{{ url_for('static', filename= 'beauty.css') }}"
 />
 {% endblock %} {% block content %}
-<center>
-  <h1>
-    Welcome, {{ user.name }}
-  </h1>
-</center>
 
-<center>
-  <div>
+<div  style="display: flex; align-items: flex-start;">
+  <div style="margin-top:3%;margin-left: 5%;">
     {% with messages = get_flashed_messages() %} {% if messages %}
       <div class=flashes>
         {{ messages[0] }}
       </div>
       {% endif %} {% endwith %}
+    <h3>All Workouts</h3>
     <table class="table table-hover" style="width: 700px;">
       <thead class="thead-dark">
         <tr>
@@ -56,7 +52,16 @@
       </tbody>
     </table>
   </div>
-</center>
 
+  <div class="box">
+    <h4 >Targets</h4>
+    <ul>
+      {% for target in targets %}
+        <li>{{ target }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+  
 
 {% endblock %}
