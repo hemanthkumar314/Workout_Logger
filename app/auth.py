@@ -19,9 +19,13 @@ def login_post():
 
     user = User.query.filter_by(email=email).first()
 
-    if not user or not (user.password==password):
+    if not user:
+        flash('Please Register and try again.')
+        return redirect(url_for('auth.signup')) 
+    elif not (user.password==password):
         flash('Please check your login details and try again.')
-        return redirect(url_for('main.index'))  
+        return redirect(url_for('main.index'))
+    
     login_user(user, remember=remember)
     return render_template('main.html')
 

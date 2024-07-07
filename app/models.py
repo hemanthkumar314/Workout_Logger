@@ -22,6 +22,7 @@ class Target(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     workout = db.Column(db.Text, nullable=False)
     count = db.Column(db.Integer, nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_posted = db.Column(db.DateTime, nullable=False,default=datetime.utcnow)
     target = db.Column(db.DateTime, nullable=False)
+    comment = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

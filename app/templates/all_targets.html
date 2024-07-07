@@ -19,6 +19,7 @@
             <th scope="col">Count</th>
             <th scope="col">Added on</th>
             <th scope="col">Target Date</th>
+            <th scope="col">Update</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
             <td>{{ target.count }}</td>
             <td>{{ target.date_posted.strftime('%d/%m/%Y') }}</td>
             <td>{{ target.target.strftime('%d/%m/%Y')  }}</td>
+            <td>{{ target.comment }}</td>
             <td>
                 <a
                 href="{{ url_for('main.delete_target', target_id=target.id) }}"
