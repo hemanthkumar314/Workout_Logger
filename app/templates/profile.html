@@ -5,10 +5,21 @@
 {% endblock %}
 
 {% block content %} 
-<center>
-    <h1>Hello {{ name }}</h1>
-    <h2>Welcome to Workouts Logger</h2>
-</center>
+<div class="container">
+    <h1 class="mt-4 mb-4">Workout Counts Over Time</h1>
+
+    {% for workout, plot_path in plot_data.items() %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="card-title">{{ workout }}</h3>
+        </div>
+        <div class="card-body">
+            <img src="{{ plot_path }}" class="img-fluid" alt="{{ workout }} Plot">
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
 
 
 {% endblock %}

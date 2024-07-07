@@ -14,3 +14,8 @@
   padding:3%;
   align-items: center;
 }
+
+a:hover
+{
+  color:#478CCF;
+}

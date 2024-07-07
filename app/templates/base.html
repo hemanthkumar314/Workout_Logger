@@ -7,7 +7,7 @@
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="{{ url_for('static', filename= 'images/muscle.ico') }}"
+      href="{{ url_for('static', filename= 'images/wall.jpeg') }}"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Arvo&display=swap"
@@ -75,17 +75,6 @@
               class="btn btn-outline-secondary"
               role="button"
               >All Workouts</a
-            >
-            {% endif %}
-          </li>
-          <li class="nav-item">
-            {% if current_user.is_authenticated %}
-            <a
-              href="{{ url_for('main.profile') }}"
-              class="btn btn-outline-secondary"
-              role="button"
-              style="margin-left: 4px;"
-              >Statistics</a
             >
             {% endif %}
           </li>

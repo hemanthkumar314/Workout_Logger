@@ -6,6 +6,9 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash,
 from flask_login import current_user, login_required
 from datetime import datetime
 
+current_date_str = datetime.now().strftime('%Y-%m-%d')
+current_date = datetime.strptime(current_date_str, '%Y-%m-%d').date()
+
 main = Blueprint('main', __name__)
 
 @main.route('/')
@@ -14,12 +17,20 @@ def index():
 
 @main.route('/home')
 def home():
-    return render_template('main.html')
+    user = User.query.filter_by(email=current_user.email).first_or_404()
+    targets = user.targets
+    targets_to_delete = []
+    
+    for target in targets:
+        if target.target.day < current_date.day:
+            targets_to_delete.append(target)
 
-@main.route('/profile')
-@login_required
-def profile():
-    return render_template('profile.html', name=current_user.name)
+    for target in targets_to_delete:
+        db.session.delete(target)
+
+    db.session.commit()
+
+    return render_template('main.html')
 
 #all workouts
 @main.route("/all")
@@ -39,7 +50,6 @@ def user_targets():
     return render_template('all_targets.html', targets=targets, user=user)
 
 #new target
-
 @main.route("/newtarget", methods=['POST'])
 @login_required
 def new_target_post():
@@ -74,22 +84,18 @@ def new_workout_post():
 
     flash('Your workout has been added!')
 
-    current_date_str = datetime.now().strftime('%Y-%m-%d')
-    current_date = datetime.strptime(current_date_str, '%Y-%m-%d').date()
-
     goal = Target.query.filter_by(workout=workout_name).first()
-    print(goal.target.day,current_date.day)
     if goal and goal.target.day>current_date.day:
         if goal.count>int(count):
             goal.count-=int(count)
-            goal.comment=f"You still have {goal.count} no. of {workout}s to complete the goal."
+            goal.comment=f"You still have {goal.count} no. of {workout_name} to complete the goal."
         else:
             goal.count=0
             goal.comment="You completed the goal"
         
         db.session.commit()
 
-    return redirect(url_for('main.home'))
+    return redirect(url_for('main.user_workouts'))
 
 #update workout
 @main.route("/workout/<int:workout_id>/update", methods=['GET', 'POST'])
@@ -97,6 +103,8 @@ def new_workout_post():
 def update_workout(workout_id):
     workout = Workout.query.get_or_404(workout_id)
     in_count=workout.count
+    in_workout=workout.workout
+
     if request.method == "POST":
         workout_name=request.form['workout']
         count=request.form['count']
@@ -106,15 +114,18 @@ def update_workout(workout_id):
         db.session.commit()
         flash('Your workout has been updated!')
 
-        current_date_str = datetime.now().strftime('%Y-%m-%d')
-        current_date = datetime.strptime(current_date_str, '%Y-%m-%d').date()
+        goal = Target.query.filter_by(workout=in_workout).first()
+        if goal:
+            goal.count+=int(in_count)
+            goal.comment=f"You still have {goal.count} no. of {workout_name} to complete the goal."
+            db.session.commit()
 
         goal = Target.query.filter_by(workout=workout_name).first()
-        print(goal.target.day,current_date.day)
+        
         if goal and goal.target.day>current_date.day:
             if goal.count>int(count):
                 goal.count-=int(count)
-                goal.comment=f"You still have {goal.count} no. of {workout}s to complete the goal."
+                goal.comment=f"You still have {goal.count} no. of {workout_name} to complete the goal."
             else:
                 goal.count=0
                 goal.comment="You completed the goal"
@@ -133,6 +144,14 @@ def delete_workout(workout_id):
     db.session.delete(workout)
     db.session.commit()
     flash('Your workout has been deleted!')
+
+    goal = Target.query.filter_by(workout=workout.workout).first()
+    if goal:
+        goal.count+=int(workout.count)
+        goal.comment=f"You still have {goal.count} no. of {workout.workout} to complete the goal."
+    
+        db.session.commit()
+
     return redirect(url_for('main.user_workouts'))
 
 #delete target
