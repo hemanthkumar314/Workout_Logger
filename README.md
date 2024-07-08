@@ -9,6 +9,7 @@
     <li><b>Logging Workouts :</b>Users can log details of their daily workouts, such as the type of exercise, duration, intensity, and comment.</li>
     <li><b>Tracking Progress:</b> Users can view their workout history to see their progress over time.</li>
     <li><b>Setting Goals :</b> Users can set fitness goals, like exercising a certain number of times per week or achieving specific fitness milestones and also helps users track their progress toward these goals.</li>
+    <li><b>Real-time Stats:</b> Users can view their workout statistics using a chart over a certain period which helps users to track their progress</li>
   </ul>
 </div>
 
@@ -20,7 +21,7 @@
       <ul>
         <li><b>HTML :</b> Structures the content on web pages.</li>
         <li><b>CSS :</b> Styles the web pages for a visually appealing layout.</li>
-        <li><b>JavaScript :</b> Adds interactivity and handles AJAX requests for real-time updates.</li>
+        <li><b>JavaScript(ChartJS) :</b> Adds interactivity and handles fetch requests for real-time updates.</li>
       </ul>
     </li>
     <li><b>Back End</b>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% block head %}{{ super() }}
+
+<link rel="stylesheet" href="{{ url_for('static',filename='beauty.css') }}">
+
+{% endblock %}
+
+{% block content %} 
+<select id="workout-select" style="margin-top: 3%;margin-left: 10%;margin-bottom: 1.5%;">
+    <option value="select">Select a workout</option>
+    <option value="Pushups" default>Pushups</option>
+    <option value="Squads">Squads</option>
+    <option value="Lunges">Lunges</option>
+    <option value="Sit-ups">Sit-ups</option>
+    <option value="Legs">Legs</option>
+</select>
+<div style="width: 75%;align-items: center;margin: auto;">
+    <canvas id="workoutChart" height="130px" style="border-radius: 5px;border: 2px white solid;"></canvas>
+</div>
+
+
+<script src="{{ url_for('static', filename='JS/charts.js') }}"></script>
+
+
+{% endblock %}

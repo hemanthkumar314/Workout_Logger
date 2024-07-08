@@ -2,7 +2,7 @@ from . import db
 from .models import User
 from .models import Workout
 from .models import Target
-from flask import Blueprint, render_template, redirect, url_for, request, flash, abort
+from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify
 from flask_login import current_user, login_required
 from datetime import datetime
 
@@ -31,6 +31,24 @@ def home():
     db.session.commit()
 
     return render_template('main.html')
+
+
+@main.route('/stats')
+@login_required
+def stats():
+    return render_template('stats.html', name=current_user.name)
+
+@main.route('/api/workout/<workout_name>')
+def get_workout_data(workout_name):
+    workouts = Workout.query.filter_by(workout=workout_name).order_by(Workout.date_posted).all()
+    workout_data = [
+        {
+            'date': workout.date_posted.strftime('%Y-%m-%d'),
+            'count': workout.count
+        } for workout in workouts
+    ]
+    print(workout_data)
+    return jsonify(workout_data)
 
 #all workouts
 @main.route("/all")
